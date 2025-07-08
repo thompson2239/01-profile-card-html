@@ -12,7 +12,16 @@ html, body {
   background: var(--cream);
   color: var(--black);
   box-sizing: border-box;
+  height: 100%;
 }
+
+body {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .navbar {
   background: var(--black);
   display: flex;
@@ -21,7 +30,31 @@ html, body {
   padding: 0 24px;
   height: 64px;
   border-bottom: 4px solid var(--yellow);
+  position: relative;
 }
+
+.navbar > a {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 48px;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.navbar > a > img {
+  height: 48px;
+  width: auto;
+  background: none;
+  border-radius: 0;
+  margin: 0;
+  box-shadow: none;
+  border: none;
+  pointer-events: auto;
+}
+
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -31,13 +64,7 @@ html, body {
   letter-spacing: 2px;
 }
 .navbar-logo img {
-  /* moved all inline styles here */
-  background: var(--yellow);
-  border-radius: 6px;
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
-  margin-right: 12px;
+  display: none;
 }
 .navbar-menu {
   display: flex;
@@ -53,17 +80,23 @@ html, body {
 }
 .main-content {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin: 0;
   min-height: 600px;
   border-bottom: 4px solid var(--yellow);
   background: var(--cream);
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
+  /* Remove tan space on right by shrinking left-panel and right-panel to exactly fill 100vw */
+  flex: 1 0 auto;
 }
+
 .left-panel {
   flex: none;
   width: 60vw;
   min-width: 0;
-  max-width: 870px;
+  max-width: none;
   background: var(--cream);
   display: flex;
   flex-direction: column;
@@ -71,7 +104,9 @@ html, body {
   padding: 0px 0 48px 0;
   height: 100%;
   gap: 0;
+  position: relative;
 }
+
 .impact-header {
   background: var(--yellow);
   color: var(--black);
@@ -128,7 +163,11 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Center vertically in left-panel */
+  justify-content: center;
   padding: 12px 24px 0 24px;
+  flex: 1 0 auto;
+  min-height: 0;
 }
 
 .donate-buttons {
@@ -165,7 +204,8 @@ html, body {
 }
 .donate-btn img, .donate-icon {
   height: 28px;
-  width: 28px;
+   width: 20px;
+  object-fit: contain;
 }
 .donate-note {
   font-size: 0.95em;
@@ -185,20 +225,22 @@ html, body {
   min-height: 500px;
   position: relative;
   width: 40vw;
-  max-width: 40vw;
+  max-width: none;
   padding: 0;
   overflow: hidden;
 }
+
 .hero-img {
   position: absolute;
   top: 0;
-  right: 0%;
-  width: 40vw;
+  left: 0;
+  width: 100%;
   height: 100%;
-  min-height: 500px;
-  max-height: 600px;
+  min-height: 0;
+  max-height: none;
   object-fit: cover;
   display: block;
+  z-index: 0;
 }
 .footer-bar {
   background: var(--black);
@@ -211,6 +253,7 @@ html, body {
   font-size: 1.35em;
   font-weight: 400;
   letter-spacing: 0.5px;
+  flex-shrink: 0;
 }
 .footer-links {
   display: flex;
@@ -222,20 +265,35 @@ html, body {
 .footer-links span {
   color: var(--cream);
 }
-.footer-icon {
-  width: 38px;
-  height: 38px;
-  background: var(--yellow);
-  border-radius: 8px;
+
+.menu-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  margin-left: 18px;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 0 4px;
+  height: 48px;
+  width: 48px;
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
 }
-.footer-icon svg {
-  width: 28px;
-  height: 28px;
+
+.menu-icon span {
   display: block;
+  width: 32px;
+  height: 5px;
+  background: var(--yellow);
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
 }
 @media (max-width: 900px) {
   .main-content {
@@ -253,5 +311,8 @@ html, body {
   }
   .footer-links {
     gap: 24px;
+  }
+  .donate-row {
+    justify-content: flex-start;
   }
 }
