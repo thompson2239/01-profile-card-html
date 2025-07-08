@@ -29,16 +29,16 @@ body {
   justify-content: space-between;
   padding: 0 24px;
   height: 64px;
-  border-bottom: 4px solid var(--yellow);
-  position: relative;
+  border-bottom: 4x solid var(--black);
+  position: sticky;
 }
 
 .navbar > a {
-  position: absolute;
+  position: sticky;
   left: 24px;
-  top: 50%;
+  top: 0%;
   transform: translateY(-50%);
-  height: 48px;
+  height: px;
   display: flex;
   align-items: center;
   z-index: 2;
@@ -294,7 +294,6 @@ body {
   transition: background 0.2s;
 }
 
-}
 @media (max-width: 900px) {
   .main-content {
     flex-direction: column;
